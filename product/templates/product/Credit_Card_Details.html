@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %} Product Page {% endblock %}
+
+{% block content %}<br><br>
+<br><br>
+<br>
+<center>
+<form action="" method="post">{% csrf_token %}
+{{ form.as_p }}
+<font color="red">{{ form.fields.errors }}</font><br>
+<input type="submit" value="Add Payment" class="btn btn-success">
+</center>
+</form>
+{% endblock %}

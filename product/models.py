@@ -17,12 +17,13 @@ class Product(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
-		return self.merchant
+		return self.product
 		return unicode(self.created)
 
 
 class ProductShippingOption(models.Model):
 	merchant = models.ForeignKey(User)
+	product = models.ForeignKey(Product, null=True)
 	INDIA = "IND"
 	AMERCIA = "US"
 	NEWZEALAND = "NWZ"
@@ -43,6 +44,18 @@ class ProductShippingOption(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
-		return self.full_name
+		return self.country
 		return unicode("%s: %s" % (self.email))
+
+
+class CreditCardDetails(models.Model):
+	merchant = models.ForeignKey(User)
+	credit_card_number = models.CharField(max_length=14, null=False, blank=False)
+	exp_month = models.CharField(max_length=2, null=False, blank=False)
+	exp_year = models.CharField(max_length=4, null=False, blank=False)
+	cvv = models.CharField(max_length=3, null=False, blank=False)
+	created = models.DateTimeField(auto_now_add=True)
+
+	def __unicode__(self):
+		return self.credit_card_number
 
