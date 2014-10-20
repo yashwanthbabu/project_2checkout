@@ -10,8 +10,13 @@ urlpatterns = patterns('product.views',
     url(r'^product/shipping/', 'shipping', name="productshippingoption"),
     url(r'^product/payment/', 'creditcarddetails', name="creditcarddetails"),
     url(r'^product/paymentsuccess/', TemplateView.as_view(template_name="payment_success.html"), name="success"),
+    url(r'^login/', 'login_user', name="loginuser"),
+    url(r'^logout/', 'logout', name="logout"),
     # url(r'^$', 'product_checkout.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url('', include('django.contrib.auth.urls', namespace='auth')),
+
 )
