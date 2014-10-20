@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Product(models.Model):
-	merchant = models.ForeignKey(User, unique=True)
+	merchant = models.ForeignKey(User)
 	PYTHON = "python"
 	DJANGO = "django"
 	BOOTSTRAP = "bootstrap"
@@ -22,7 +22,7 @@ class Product(models.Model):
 
 
 class ProductShippingOption(models.Model):
-	merchant = models.ForeignKey(User, unique=True)
+	merchant = models.ForeignKey(User)
 	INDIA = "IND"
 	AMERCIA = "US"
 	NEWZEALAND = "NWZ"
