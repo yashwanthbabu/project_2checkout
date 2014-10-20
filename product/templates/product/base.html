@@ -19,6 +19,21 @@
                         <div class="navbar-header">
                             <a class="navbar-brand" href="{% url 'product' %}"><h2 style="margin-top: -15px; margin-bottom: 100px; border-bottom-width: 1px;">ProductStore</h2></a>
                         </div>
+                        <center>
+                        {% if request.user and not request.user.is_anonymous %}
+                        <font color="white" size="3"> Welcome {{ request.user.get_full_name|default:request.user.username }}</font>
+                        {% endif %}
+                        </center>
+                        <div class="nav navbar-nav navbar-right">
+                        <div class="panel-heading">
+                            <div class="btn-group pull-right">
+                            {% if request.user and not request.user.is_anonymous %}
+                            <a href="{% url 'logout' %}" class="btn btn-default btn-sm"> LOGOUT </a>&nbsp;
+                            {% else %}
+                            <a href="{% url 'login' %}" class="btn btn-default btn-sm"> Login </a>
+                            {% endif %}
+                        </div>
+                        </div>
         </div>
     </div>
     </div>
@@ -26,7 +41,17 @@
     </div>
 
     <div id="content">
-    	{% block content %}{% endblock %}
+    	{% block content %}
+
+            <center>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <font color="red">{{ message }}</font>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </center>{% endblock %}
     </div>
 </body>
 </html>

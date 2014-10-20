@@ -8,6 +8,9 @@
 <center>
 <form action="" method="post">
 {% csrf_token %}
+<input type="hidden" name="sid" value="1303908">
+<input type="hidden" name="mode" value="2CO">
+<input type="hidden" name="li_0_type" value="product">
 {{ form.as_p }}
 <font color="red">{{ form.fields.errors }}</font><br>
 <input type="submit" value="Continue to Shipping Information" class="btn btn-success">
