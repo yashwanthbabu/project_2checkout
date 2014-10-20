@@ -3,8 +3,8 @@ from django.shortcuts import render, render_to_response, \
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 
-from .models import Product, ProductShippingOption
-from .forms import ProductForm, ProductShippingOptionForm
+from .models import Product, ProductShippingOption, CreditCardDetails
+from .forms import ProductForm, ProductShippingOptionForm, CreditCardDetailsForm
 
 def product(request):
 	form = ProductForm()
@@ -23,5 +23,15 @@ def shipping(request):
 		form = ProductShippingOptionForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect(reverse('product'))
+			return HttpResponseRedirect(reverse('creditcarddetails'))
 	return render_to_response("shipping.html", {'form': form}, context_instance=RequestContext(request))
+
+
+def creditcarddetails(request):
+	form = CreditCardDetailsForm()
+	if request.method == "POST":
+		form = CreditCardDetailsForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('success'))
+	return render_to_response("Credit_Card_Details.html", {'form': form}, context_instance=RequestContext(request))
