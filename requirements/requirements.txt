@@ -1,0 +1,10 @@
+Django==1.6
+South==1.0
+argparse==1.2.1
+django-localflavor==1.0
+django-registration==1.0
+django-suit==0.2.11
+ipdb==0.8
+ipython==2.3.0
+pytz==2014.7
+wsgiref==0.1.2
