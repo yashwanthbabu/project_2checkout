@@ -10,6 +10,9 @@ from django.contrib import messages
 from .models import Product, ProductShippingOption, CreditCardDetails
 from .forms import ProductForm, ProductShippingOptionForm, CreditCardDetailsForm
 
+from tocheckout.tocheckout.forms import tocheckoutPaymentForm
+from tocheckout.tocheckout.models import tocheckoutResponse
+
 def product(request):
 	form = ProductForm()
 	if request.method == 'POST':
@@ -23,7 +26,6 @@ def product(request):
 
 def shipping(request):
 	form = ProductShippingOptionForm()
-	import ipdb;ipdb.set_trace()
 	print request.user
 	if request.method == "POST":
 		form = ProductShippingOptionForm(request.POST)
