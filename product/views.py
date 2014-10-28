@@ -13,33 +13,40 @@ from .forms import ProductForm, ProductShippingOptionForm, CreditCardDetailsForm
 from tocheckout.tocheckout.forms import tocheckoutPaymentForm
 from tocheckout.tocheckout.models import tocheckoutResponse
 
+@login_required
 def product(request):
 	form = ProductForm()
+	merchant = request.user
 	if request.method == 'POST':
 		form = ProductForm(request.POST)
 		if form.is_valid():
 			form = form.save(commit=False)
+			form.merchant = request.user
 			form.save()
 			return HttpResponseRedirect(reverse('productshippingoption'))
 	return render_to_response("product.html",{'form': form}, context_instance=RequestContext(request))
 
 
+@login_required
 def shipping(request):
 	form = ProductShippingOptionForm()
-	print request.user
+	merchant = request.user
+	import ipdb;ipdb.set_trace()
 	if request.method == "POST":
 		form = ProductShippingOptionForm(request.POST)
 		if form.is_valid():
+			form.merchant = request.user
 			form.save()
 			return HttpResponseRedirect(reverse('creditcarddetails'))
 	return render_to_response("shipping.html", {'form': form}, context_instance=RequestContext(request))
 
-
+@login_required
 def creditcarddetails(request):
 	form = CreditCardDetailsForm()
 	if request.method == "POST":
 		form = CreditCardDetailsForm(request.POST)
 		if form.is_valid():
+			form.merchant = request.user
 			form.save()
 			return HttpResponseRedirect(reverse('success'))
 	return render_to_response("Credit_Card_Details.html", {'form': form}, context_instance=RequestContext(request))
